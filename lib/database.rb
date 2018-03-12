@@ -1,7 +1,7 @@
 require 'pg'
 
 class Database
-  def connect
+  def read
     con = PG.connect dbname: 'bookmark_manager', user: 'alfiedarko'
     links = con.exec 'SELECT * FROM links'
 
@@ -16,4 +16,10 @@ class Database
     #   rs.clear if rs
     #   con.close if con
   end
+
+  def create; end
+
+  def update; end
+
+  def delete; end
 end

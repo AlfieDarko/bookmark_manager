@@ -8,6 +8,6 @@ class Link
     #   'http://www.facebook.com'
     # ]
     db = Database.new
-    db.connect
+    db.read
   end
 end
