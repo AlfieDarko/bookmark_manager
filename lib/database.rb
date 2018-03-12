@@ -2,7 +2,12 @@ require 'pg'
 
 module Database
   def self.read
-    con = PG.connect dbname: 'bookmark_manager', user: 'alfiedarko'
+    con = if ENV['ENVIRONMENT'] == 'test'
+            PG.connect(dbname: 'bookmark_manager_test')
+          else
+            PG.connect(dbname: 'bookmark_manager')
+          end
+
     links = con.exec 'SELECT * FROM links'
     links.map { |link| link['url']  }
   rescue PG::Error => e
