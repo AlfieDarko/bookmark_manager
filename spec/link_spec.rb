@@ -4,10 +4,10 @@ describe Link do
   describe '.all' do
     it 'returns all the links' do
       links = Link.all
+      expect(links).to include 'http://facebook.com'
 
-      expect(links).to include 'http://www.makersacademy.com'
-      expect(links).to include 'http://www.google.com'
-      expect(links).to include 'http://www.facebook.com'
+      expect(links).to include 'http://makersacademy.com'
+      expect(links).to include 'http://google.com'
     end
   end
 end
