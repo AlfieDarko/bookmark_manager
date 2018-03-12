@@ -7,7 +7,6 @@ class Link
     #   'http://www.google.com',
     #   'http://www.facebook.com'
     # ]
-    db = Database.new
-    db.read
+    Database.read
   end
 end
