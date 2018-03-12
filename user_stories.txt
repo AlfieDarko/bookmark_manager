@@ -6,8 +6,10 @@ As a user,
 so I can add new bookmarks,
 I'd like an easy add method.
 
-As a user, 
+As a user,
 so I can delete bookmarks,
 I'd like an easy delete method
 
 As a user,
+so I can add more links
+I'd like a form where i can enter my link

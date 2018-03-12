@@ -14,7 +14,17 @@ module Database
     puts e.message
   end
 
-  def self.create; end
+  def self.create(post)
+    con = if ENV['ENVIRONMENT'] == 'test'
+            PG.connect(dbname: 'bookmark_manager_test')
+          else
+            PG.connect(dbname: 'bookmark_manager')
+          end
+
+    post = con.exec "INSERT INTO links (url) VALUES ('#{post}')"
+  rescue PG::Error => e
+    puts e.message
+  end
 
   def self.update; end
 
