@@ -15,7 +15,7 @@ class BookmarkManager < Sinatra::Base
   post '/addlink' do
     @valid = Link.valid_url?(params[:add_link])
     if @valid
-      Link.post(params[:add_link])
+      Link.post(url: params[:add_link], title: params[:add_title])
       flash[:notice] = 'URL added to Bookie!'
       redirect('/')
     else

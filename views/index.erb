@@ -22,13 +22,8 @@
             <a class="nav-link" href="#">Bookmarks
               <span class="sr-only">(current)</span></a>
           </li>
-          <!-- <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li> <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown </a> -->
-          <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <div class="dropdown-divider"></div> <a class="dropdown-item" href="#">Something else
-          here</a> </div> -->
-          <!-- </li> -->
-          <!-- <li class="nav-item"> <a class="nav-link disabled" href="#">Disabled</a> </li> -->
         </ul>
+
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -44,11 +39,12 @@
 
           <ul>
             <% @links.each do |link| %>
-              <li name="<%= link %>">
-
-                <%= link %>
-                <br>
+              <li id="link-<%= link.id %>">
+                <a href="<%= link.url %>" target="_blank">
+                  <%= link.title %>
+                </a>
               </li>
+              <br>
             <% end %>
           </ul>
 
@@ -57,7 +53,13 @@
         <div class="col-sm-3">
           <h4>Add New Bookmarks</h4>
           <form class="" action="/addlink" method="post">
-            <input class="input-sm" type="text" name="add_link" value="">
+            <label for="add_link">url
+              <input class="input-sm" type="text" name="add_link" value="">
+            </label>
+            <label for="add_title">title
+              <input class="input-sm" type="text" name="add_title" value="">
+            </label>
+
             <br>
             <button type="submit" name="submit_link" value="submit_link">Add Links</button>
           </form>

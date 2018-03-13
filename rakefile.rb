@@ -14,9 +14,9 @@ task :test_environment do
   p 'test data added!'
   # Adds test data
   connection = PG.connect(dbname: 'bookmark_manager_test')
-  connection.exec("INSERT INTO links VALUES(1, 'http://www.makersacademy.com');")
-  connection.exec("INSERT INTO links VALUES(2, 'http://www.google.com');")
-  connection.exec("INSERT INTO links VALUES(3, 'http://www.facebook.com');")
+  connection.exec("INSERT INTO links VALUES(1, 'http://www.makersacademy.com', 'Makers Academy');")
+  connection.exec("INSERT INTO links VALUES(2, 'http://www.google.com', 'Google');")
+  connection.exec("INSERT INTO links VALUES(3, 'http://www.facebook.com', 'Facebook');")
   p 'complete'
 end
 
@@ -39,8 +39,11 @@ task :setup do
 
   begin
     connection = PG.connect(dbname: 'bookmark_manager')
-    connection.exec('CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60));')
-  rescue StandardError
+    begin
+      connection.exec('CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60), title VARCHAR(60));')
+    rescue StandardError
+      StandardError
+    end
     p 'Links table already exists in Development Database'
   end
 

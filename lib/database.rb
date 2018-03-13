@@ -16,6 +16,6 @@ class DatabaseConnection
   end
 
   def self.query(sql_string)
-    @@con.exec sql_string
+    @@con.exec(sql_string)
   end
 end
