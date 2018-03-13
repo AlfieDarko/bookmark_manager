@@ -1,13 +1,14 @@
 require 'sinatra/base'
 require './lib/link'
 require './setup_script.rb'
+require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
+  register Sinatra::Flash
 
   get '/' do
     @links = Link.all
-
     erb :index
   end
 
@@ -15,9 +16,11 @@ class BookmarkManager < Sinatra::Base
     @valid = Link.valid_url?(params[:add_link])
     if @valid
       Link.post(params[:add_link])
+      flash[:notice] = 'URL added to Bookie!'
       redirect('/')
     else
-      return 'Invalid URL'
+      flash[:warning] = 'Incorrect URL! Try again'
+      redirect('/')
     end
   end
 
