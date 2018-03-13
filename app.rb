@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './lib/link'
+require './setup_script.rb'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions

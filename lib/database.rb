@@ -1,32 +1,21 @@
 require 'pg'
 
-module Database
-  def self.read
-    con = if ENV['ENVIRONMENT'] == 'test'
-            PG.connect(dbname: 'bookmark_manager_test')
-          else
-            PG.connect(dbname: 'bookmark_manager')
+class DatabaseConnection
+  attr_reader :con, :database_name
+  def self.setup(database_name)
+    @@database_name = database_name
+    @@con = if ENV['ENVIRONMENT'] == 'test'
+              PG.connect(dbname: 'bookmark_manager_test')
+            else
+              PG.connect(dbname: @@database_name)
           end
-
-    links = con.exec 'SELECT * FROM links'
-    links.map { |link| link['url']  }
-  rescue PG::Error => e
-    puts e.message
   end
 
-  def self.create(post)
-    con = if ENV['ENVIRONMENT'] == 'test'
-            PG.connect(dbname: 'bookmark_manager_test')
-          else
-            PG.connect(dbname: 'bookmark_manager')
-          end
-
-    post = con.exec "INSERT INTO links (url) VALUES ('#{post}')"
-  rescue PG::Error => e
-    puts e.message
+  def self.con
+    @@con
   end
 
-  def self.update; end
-
-  def self.delete; end
+  def self.query(sql_string)
+    @@con.exec sql_string
+  end
 end
