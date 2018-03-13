@@ -8,9 +8,9 @@ describe Link do
       # insert this line to map all the links to urls
       urls = links.map(&:url)
 
-      expect(links).to include 'http://www.facebook.com'
-      expect(links).to include 'http://www.makersacademy.com'
-      expect(links).to include 'http://www.google.com'
+      expect(urls).to include 'http://www.facebook.com'
+      expect(urls).to include 'http://www.makersacademy.com'
+      expect(urls).to include 'http://www.google.com'
     end
   end
 
