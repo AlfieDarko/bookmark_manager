@@ -7,12 +7,18 @@ class BookmarkManager < Sinatra::Base
 
   get '/' do
     @links = Link.all
+
     erb :index
   end
 
   post '/addlink' do
-    Link.post(params[:add_link])
-    redirect('/')
+    @valid = Link.valid_url?(params[:add_link])
+    if @valid
+      Link.post(params[:add_link])
+      redirect('/')
+    else
+      return 'Invalid URL'
+    end
   end
 
   run! if app_file == $PROGRAM_NAME

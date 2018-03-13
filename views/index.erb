@@ -61,6 +61,13 @@
             <br>
             <button type="submit" name="submit_link" value="submit_link">Add Links</button>
           </form>
+
+          <br>
+          <% if not @valid %>
+            <div class="alert alert-danger" role="alert" style="<%= @alert %>">
+              <small>Invalid url, try again</small>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
