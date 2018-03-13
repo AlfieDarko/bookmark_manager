@@ -3,12 +3,13 @@ ENV['ENVIRONMENT'] = 'test'
 
 # Bring in the contents of the `app.rb` file
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
+require File.join(File.dirname(__FILE__), '..', 'rakefile.rb')
 
 # Require all the testing gems
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-
+require 'rake'
 # Tell Capybara to talk to BookmarkManager
 Capybara.app = BookmarkManager
 
@@ -29,7 +30,9 @@ Capybara.app = BookmarkManager
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.before(:each) do
-    require_relative './test_db_setup.rb'
+    Rake::Task['test_environment'].invoke
+
+    # require_relative './test_db_setup.rb'
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
