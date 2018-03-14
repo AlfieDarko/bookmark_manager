@@ -35,4 +35,18 @@ describe Link do
       expect(urls).not_to include 'not a real link'
     end
   end
+
+  # require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+
+  describe '.delete' do
+    it 'deletes link' do
+      Link.post(url: 'http://www.twitter.com')
+      Link.delete(url: 'http://www.twitter.com')
+
+      links = Link.all
+      urls = links.map(&:url)
+
+      expect(urls).not_to include 'http://www.twitter.com'
+    end
+  end
 end
