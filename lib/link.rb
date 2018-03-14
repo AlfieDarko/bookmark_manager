@@ -17,7 +17,6 @@ class Link
 
   def self.all
     result = DatabaseConnection.query('SELECT * FROM links')
-
     result.map { |link| Link.new(link['id'], link['url'], link['title']) }
   end
 
@@ -26,4 +25,10 @@ class Link
       DatabaseConnection.query("INSERT INTO links (url, title) VALUES('#{post[:url]}', '#{post[:title]}')")
     end
   end
+
+  def self.delete; end
+
+  def self.update; end
+
+  def self.find; end
 end
