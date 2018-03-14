@@ -26,7 +26,9 @@ class Link
     end
   end
 
-  def self.delete; end
+  def self.delete(post)
+    DatabaseConnection.query("DELETE FROM links WHERE id = #{post[:id]}")
+  end
 
   def self.update; end
 

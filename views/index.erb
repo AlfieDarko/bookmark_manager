@@ -39,14 +39,18 @@
 
           <ul>
             <% @links.each do |link| %>
-              <li id="link-<%= link.id %>">
-                <a href="<%= link.url %>" target="_blank">
-                  <%= link.title %>
-                </a>
-              </li>
-              <br>
-            <% end %>
-          </ul>
+              <form class="" action="/delete/<%=link.id%>" method="post">
+                <li id="link-<%= link.id %>">
+                  <a href="<%= link.url %>" target="_blank">
+                    <%= link.title %>
+                  </a>
+                </li>
+                <button href="/" type="submit" value="<%=link.id %>" name="id">🗑️</button>
+                <br>
+              <% end %>
+            </ul>
+
+          </form>
 
         </div>
         <div class="col-sm-5"><br></div>

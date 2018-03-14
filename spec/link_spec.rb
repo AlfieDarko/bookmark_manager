@@ -41,7 +41,7 @@ describe Link do
   describe '.delete' do
     it 'deletes link' do
       Link.post(url: 'http://www.twitter.com')
-      Link.delete(url: 'http://www.twitter.com')
+      Link.delete(id: '8')
 
       links = Link.all
       urls = links.map(&:url)
