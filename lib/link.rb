@@ -15,12 +15,12 @@ class Link
     url =~ url_regexp ? true : false
   end
 
-  def self.all
+  def self.read
     result = DatabaseConnection.query('SELECT * FROM links')
     result.map { |link| Link.new(link['id'], link['url'], link['title']) }
   end
 
-  def self.post(post)
+  def self.create(post)
     if valid_url?(post[:url])
       DatabaseConnection.query("INSERT INTO links (url, title) VALUES('#{post[:url]}', '#{post[:title]}')")
     end
@@ -30,7 +30,9 @@ class Link
     DatabaseConnection.query("DELETE FROM links WHERE id = #{post[:id]}")
   end
 
-  def self.update; end
+  def self.update(post)
+    DatabaseConnection.query("UPDATE links SET url = '#{post[:url]}', title = '#{post[:title]}' WHERE id = #{post[:id]}")
+  end
 
   def self.find; end
 end

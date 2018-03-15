@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <script type="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <meta charset="utf-8">
     <title></title>
   </head>
@@ -34,54 +43,100 @@
     <br>
     <div class="container">
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-5">
           <h3>Bookmarks</h3>
 
           <ul>
+            <!-- START OF LOOP -->
             <% @links.each do |link| %>
-              <form class="" action="/delete/<%=link.id%>" method="post">
+              <!-- DELETE BUTTON -->
+              <div class="col-sm-4">
                 <li id="link-<%= link.id %>">
                   <a href="<%= link.url %>" target="_blank">
                     <%= link.title %>
                   </a>
                 </li>
-                <button href="/" type="submit" value="<%=link.id %>" name="id">🗑️</button>
-                <br>
-              <% end %>
-            </ul>
 
-          </form>
+              </div>
+              <div class="">
 
-        </div>
-        <div class="col-sm-5"><br></div>
-        <div class="col-sm-3">
-          <h4>Add New Bookmarks</h4>
-          <form class="" action="/addlink" method="post">
-            <label for="add_link">url
-              <input class="input-sm" type="text" name="add_link" value="">
-            </label>
-            <label for="add_title">title
-              <input class="input-sm" type="text" name="add_title" value="">
-            </label>
+                <!-- DIV THAT GROUPS BUTTONS TOGETHER -->
+                <div class="btn-group">
+                  <!-- DELETE BUTTO START -->
 
-            <br>
-            <button type="submit" name="submit_link" value="submit_link">Add Links</button>
-          </form>
+                  <form class="" action="/links/<%=link.id%>" method="post">
+                    <input id="hidden" type="hidden" name="_method" value="delete">
+                    <button class="btn btn-danger btn-sm" type="submit" value="delete">Delete</button>
+                  </form>
+                </form>
+                <!-- DELETE BUTTON END-->
+
+                <!-- EDIT BUTTON START-->
+                <form class="" action="/links/<%=link.id%>" method="post">
+
+                  <p>
+                    <a name="edit_button" id="edit_button<%=link.id%>" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample<%=link.id%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=link.id%>">
+                      Edit
+                    </a>
+                  </p>
+
+                  <div class="collapse" id="collapseExample<%=link.id%>">
+                    <div class="card card-body">
+                      <input id="hidden" type="hidden" name="_method" value="patch">
+                      <label for="new_url">URL
+                        <input id="new_url<%=link.id%>" type="text" name="new_url" value="">
+                      </label>
+
+                      <label for="new_title">
+                        Title
+                        <input id="new_title<%=link.id%>" type="text" name="new_title" value="">
+                      </label>
+                      <br>
+                      <button id="submit_<%=link.id%>" class="btn btn-primary" type="submit" name="button">Submit</button>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- EDIT BUTTON END-->
+
+              </div>
+              <!-- DIV THAT GROUPS BUTTONS TOGETHER ENDS HERE -->
+            </div>
+
+          <% end %>
+          <!-- END OF LOOP -->
+        </ul>
+
+      </div>
+      <div class="col-sm-4"><br></div>
+      <div class="col-sm-3">
+        <h4>Add New Bookmarks</h4>
+        <form class="" action="/links" method="post">
+          <label for="add_link">url
+            <input class="input-sm" type="text" name="add_link" value="">
+          </label>
+          <label for="add_title">title
+            <input class="input-sm" type="text" name="add_title" value="">
+          </label>
 
           <br>
+          <button class="btn btn-primary" type="submit" name="submit_link" value="submit_link">Add Links</button>
+        </form>
 
-          <div id='flash'>
-            <% flash.keys.each do |type| %>
-              <div data-alert="data-alert" class="flash <%= type %> alert-box radius">
-                <%= flash[type] %>
-                <a href="/" class="close">&times;</a>
-              </div>
-            <% end %>
-          </div>
+        <br>
 
+        <div id='flash'>
+          <% flash.keys.each do |type| %>
+            <div data-alert="data-alert" class="flash <%= type %> alert-box radius">
+              <%= flash[type] %>
+              <a href="/" class="close">&times;</a>
+            </div>
+          <% end %>
         </div>
+
       </div>
     </div>
+  </div>
 
-  </body>
+</body>
 </html>
