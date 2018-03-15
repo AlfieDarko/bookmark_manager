@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -43,7 +44,7 @@
     <br>
     <div class="container">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <h3>Bookmarks</h3>
 
           <ul>
@@ -99,6 +100,32 @@
                 </form>
                 <!-- EDIT BUTTON END-->
 
+                <!-- COMMENTS BUTTON STARTS -->
+                <p>
+                  <a name="comment_button" id="comment_button<%=link.id%>" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseComment<%=link.id%>" role="button" aria-expanded="false" aria-controls="collapseComment<%=link.id%>">
+                    Read Comments
+                  </a>
+                </p>
+                <br>
+
+                <div class="collapse" id="collapseComment<%=link.id%>">
+                  <div class="card card-body">
+
+                    <br>
+
+                    <h6>Comment 1
+                      <br>
+                      <small>
+                        I like this site, it is very informative!
+                      </small>
+                    </h6>
+                    <br>
+
+                  </div>
+                </div>
+
+                <!-- COMMENTS BUTTON ENDS -->
+
               </div>
               <!-- DIV THAT GROUPS BUTTONS TOGETHER ENDS HERE -->
             </div>
@@ -108,7 +135,7 @@
         </ul>
 
       </div>
-      <div class="col-sm-4"><br></div>
+      <div class="col-sm-3"><br></div>
       <div class="col-sm-3">
         <h4>Add New Bookmarks</h4>
         <form class="" action="/links" method="post">
@@ -127,7 +154,7 @@
 
         <div id='flash'>
           <% flash.keys.each do |type| %>
-            <div data-alert="data-alert" class="flash <%= type %> alert-box radius">
+            <div data-alert="data-alert" class="flash alert alert-<%= type %> alert-box radius">
               <%= flash[type] %>
               <a href="/" class="close">&times;</a>
             </div>
