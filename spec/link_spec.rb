@@ -44,13 +44,11 @@ describe Link do
       Link.delete(id: 7)
 
       links = Link.read
-      urls = links.map(&:url)
 
+      urls = links.map(&:url)
       expect(urls).not_to include 'http://www.twitter.com'
     end
-
   end
-
 
   describe '.update' do
     it 'updates links' do
@@ -61,7 +59,4 @@ describe Link do
       expect(urls).to include 'http://www.guardian123.com'
     end
   end
-
-
-
 end

@@ -59,83 +59,75 @@
                 </li>
 
               </div>
-              <div class="">
 
-                <!-- DIV THAT GROUPS BUTTONS TOGETHER -->
-                <div class="btn-group">
-                  <!-- DELETE BUTTO START -->
+              <!-- DIV THAT GROUPS BUTTONS TOGETHER -->
+              <div class="btn-group">
+                <!-- DELETE BUTTO START -->
 
-                  <form class="" action="/links/<%=link.id%>" method="post">
-                    <input id="hidden" type="hidden" name="_method" value="delete">
-                    <button class="btn btn-danger btn-sm" type="submit" value="delete">Delete</button>
-                  </form>
-                </form>
-                <!-- DELETE BUTTON END-->
-
-                <!-- EDIT BUTTON START-->
                 <form class="" action="/links/<%=link.id%>" method="post">
-
-                  <p>
-                    <a name="edit_button" id="edit_button<%=link.id%>" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample<%=link.id%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=link.id%>">
-                      Edit
-                    </a>
-                  </p>
-
-                  <div class="collapse" id="collapseExample<%=link.id%>">
-                    <div class="card card-body">
-                      <input id="hidden" type="hidden" name="_method" value="patch">
-                      <label for="new_url">URL
-                        <input id="new_url<%=link.id%>" type="text" name="new_url" value="">
-                      </label>
-
-                      <label for="new_title">
-                        Title
-                        <input id="new_title<%=link.id%>" type="text" name="new_title" value="">
-                      </label>
-                      <br>
-                      <button id="submit_<%=link.id%>" class="btn btn-primary" type="submit" name="button">Submit</button>
-                    </div>
-                  </div>
-
+                  <input id="hidden" type="hidden" name="_method" value="delete">
+                  <button class="btn btn-danger btn-sm" type="submit" value="delete">Delete</button>
                 </form>
-                <!-- EDIT BUTTON END-->
+              </form>
+              <!-- DELETE BUTTON END-->
 
-                <!-- COMMENTS BUTTON STARTS -->
+              <!-- EDIT BUTTON START-->
+              <form class="" action="/links/<%=link.id%>" method="post">
+
                 <p>
-                  <a name="comment_button" id="comment_button<%=link.id%>" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseComment<%=link.id%>" role="button" aria-expanded="false" aria-controls="collapseComment<%=link.id%>">
-                    Read Comments
+                  <a name="edit_button" id="edit_button<%=link.id%>" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample<%=link.id%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=link.id%>">
+                    Edit
                   </a>
                 </p>
-                <br>
 
-                <div class="collapse" id="collapseComment<%=link.id%>">
+                <div class="collapse" id="collapseExample<%=link.id%>">
                   <div class="card card-body">
+                    <input id="hidden" type="hidden" name="_method" value="patch">
+                    <label for="new_url">URL
+                      <input id="new_url<%=link.id%>" type="text" name="new_url" value="">
+                    </label>
 
+                    <label for="new_title">
+                      Title
+                      <input id="new_title<%=link.id%>" type="text" name="new_title" value="">
+                    </label>
                     <br>
-
-                    <h6>Comment 1
-                      <br>
-                      <small>
-                        I like this site, it is very informative!
-                      </small>
-                    </h6>
-                    <br>
-
+                    <button id="submit_<%=link.id%>" class="btn btn-primary" type="submit" name="button">Submit</button>
                   </div>
                 </div>
 
-                <!-- COMMENTS BUTTON ENDS -->
+              </form>
+              <!-- EDIT BUTTON END-->
 
+              <!-- COMMENTS BUTTON STARTS -->
+              <p>
+                <a name="comment_button" id="comment_button<%=link.id%>" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseComment<%=link.id%>" role="button" aria-expanded="false" aria-controls="collapseComment<%=link.id%>">
+                  Read Comments
+                </a>
+              </p>
+              <br>
+
+              <div class="collapse" id="collapseComment<%=link.id%>">
+                <div class="card card-body">
+                  <h6>Comment 1
+                    <br>
+                    <small>
+                      I like this site, it is very informative!
+                    </small>
+                  </h6>
+                </div>
               </div>
-              <!-- DIV THAT GROUPS BUTTONS TOGETHER ENDS HERE -->
+              <!-- COMMENTS BUTTON ENDS -->
+
             </div>
+            <!-- DIV THAT GROUPS BUTTONS TOGETHER ENDS HERE -->
 
           <% end %>
           <!-- END OF LOOP -->
         </ul>
 
       </div>
-      <div class="col-sm-3"><br></div>
+      <div class="col-sm-2"><br></div>
       <div class="col-sm-3">
         <h4>Add New Bookmarks</h4>
         <form class="" action="/links" method="post">

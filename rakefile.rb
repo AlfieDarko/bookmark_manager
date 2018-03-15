@@ -7,11 +7,15 @@ task :test_environment do
   connection = PG.connect(dbname: 'bookmark_manager_test')
 
   # Clear the database
-  connection.exec('TRUNCATE links;')
+  connection.exec('TRUNCATE links, comments;')
+  # connection.exec('TRUNCATE comments;')
+
   p 'database cleared'
 
   # resets serial numbers
   connection.exec('ALTER SEQUENCE links_id_seq RESTART WITH 1')
+
+  connection.exec('ALTER SEQUENCE comments_id_seq RESTART WITH 1')
 
   # Adds test data
   p 'test data being added'
@@ -38,7 +42,18 @@ end
   begin
     connection = PG.connect(dbname: database)
     connection.exec('CREATE TABLE links(url VARCHAR(60), title VARCHAR(60));')
+
+    connection.exec('CREATE TABLE comments(id SERIAL PRIMARY KEY, text VARCHAR(240), link_id INTEGER REFERENCES links (id));')
   rescue StandardError
-    p "Links table already exists in #{database}"
+    p "table already exists in #{database}"
+  end
+end
+
+task :teardown do
+  p 'Tearing down databases...'
+
+  %w[bookmark_manager bookmark_manager_test].each do |database|
+    connection = PG.connect
+    connection.exec("DROP DATABASE #{database};")
   end
 end
